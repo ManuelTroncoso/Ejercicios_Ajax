@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script>
+    var adivinanzaRepes = [];
+    var x;
+function NuevaAd(){ 
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(xhr.status == 200 && xhr.readyState == 4){
+            var objeto = JSON.parse(this.responseText);
+            var random = Math.floor(Math.random() * objeto.length);
+            if(adivinanzaRepes.length == objeto.length){
+                alert('Has terminado todas las adivinanzas')
+                window.close();
+            }
+            else{
+                while(adivinanzaRepes.indexOf(random) != '-1'){
+                random = Math.floor(Math.random() * objeto.length);
+            }
+                adivinanzaRepes.push(random);
+                x = objeto[random]
+                AdRandom();
+            }
+
+        }
+    }
+    xhr.open("GET", 'Adivinanza.json', true);
+    xhr.send();
+
+}
+function AdRandom(){
+    document.getElementById("texto").innerHTML = x.versos
+}
+function Pista(){
+    alert(x.pista);
+}
+function Solucion(){
+    document.getElementById("solucion").innerHTML = x.solucion;
+    document.getElementsByClassName("Desaparecer")[1].disabled =true;
+    document.getElementById("solucion").style.color = 'red';
+}
+</script>
+<body>
+    <button onclick="NuevaAd()">Nueva Adivinanza</button>
+    <p id="texto"></p>
+    <p id="solucion"></p>
+    <button class="Desaparecer" onclick="Pista()">Pista II</button> <button class="Desaparecer" onclick="Solucion()">Solucion</button>
+</body>
+</html>

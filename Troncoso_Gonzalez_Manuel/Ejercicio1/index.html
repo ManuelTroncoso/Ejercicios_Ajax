@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="cifrado.js"></script>
+    <title>Cifrado</title>
+</head>
+<script>
+    var cifrados
+   window.onload = function () {
+        cifrados = JSON.parse(cifrado);
+       
+    }
+    function cifrar(){
+        document.getElementById('textdescifrar').innerHTML = ""
+        var cifrar = document.getElementById('textcifrar').value;
+        cifrar = cifrar.toUpperCase();
+        for(var i = 0; i<cifrar.length;i++){
+            for(var j = 0; j<cifrados.length;j++){
+                if(cifrar[i] == cifrados[j].letra){
+                    document.getElementById('textdescifrar').value += (cifrados[j].numero) + " "
+                    break;
+                }
+                else{
+                    if(j == cifrados.length-1){
+                        document.getElementById('textdescifrar').value += "* "
+                    }
+                    
+                }
+            }
+            
+        }
+       
+
+    }
+    function descifrar(){
+        document.getElementById('textcifrar').innerHTML = ""
+        var cifrar = document.getElementById('textdescifrar').value;
+        cifrar = cifrar.split(" ");
+        for(var i = 0; i<cifrar.length;i++){
+            for(var j = 0; j<cifrados.length;j++){
+                if(cifrar[i] == cifrados[j].numero){
+                    document.getElementById('textcifrar').value += (cifrados[j].letra)
+                    break;
+                }
+                else{
+                    if(j == cifrados.length-1){
+                        document.getElementById('textcifrar').value += "* "
+                    }
+                    
+                }
+            }
+            
+        }
+       
+
+    }
+
+</script>
+<body>
+    Texto a cifrar <textarea name="" id="textcifrar" cols="30" rows="10"></textarea><button onclick="cifrar()">Cifrar</button>
+    Texto a descifrar <textarea name="" id="textdescifrar" cols="30" rows="10"></textarea> <button onclick="descifrar()">descifrar</button>
+</body>
+</html>

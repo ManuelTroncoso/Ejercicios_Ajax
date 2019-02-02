@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Grabar</title>
+    <script>
+    function EnviaDatos(){
+    var nif = document.getElementById('nif').value;
+    var psw = document.getElementById('psw').value;
+    console.log(nif)
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+        
+        }
+    }
+    xhr.open("POST", 'grabar.php', true);
+    xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
+    xhr.send("nif=" + nif+"&password="+ psw);
+   }
+    </script>
+</head>
+
+<body>
+    Numero de DNI<input type="text" name="" id="nif">
+    Contraseña <input type="password" name="" id="psw">
+    <button onclick="EnviaDatos()">Enviar Datos</button>
+
+</body>
+</html>
